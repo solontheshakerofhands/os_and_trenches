@@ -1,18 +1,18 @@
 name: Deploy Flutter Web to Cloudflare Pages
 
-on:
+'on':
   push:
     branches:
       - main
     paths:
-      - '/os_and_trenches/**' # ONLY trigger if frontend changes
+      - 'os_and_trenches/**' # ONLY trigger if frontend changes
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: apps/frontend
+        working-directory: os_and_trenches
 
     steps:
       - name: Checkout repository
@@ -40,5 +40,5 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: 'os_and_trenches'
-          directory: '/os_and_trenches/build/web' # Point directly to the web build output inside the subfolder
+          directory: 'os_and_trenches/build/web' # Point directly to the web build output inside the subfolder
           gitBranch: 'main'
