@@ -1,0 +1,44 @@
+name: Deploy Flutter Web to Cloudflare Pages
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'apps/frontend/**' # ONLY trigger if frontend changes
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/frontend
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Set up Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
+      - name: Build Flutter Web
+        run: |
+          flutter pub get
+          flutter build web --release
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: 'my-flutter-app'
+          directory: 'apps/frontend/build/web' # Point directly to the web build output inside the subfolder
+          gitBranch: 'main'
