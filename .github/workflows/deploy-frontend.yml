@@ -4,6 +4,7 @@ name: Deploy Flutter Web to Cloudflare Pages
   push:
     branches:
       - main
+      - 'releases/**'
     paths:
       - 'os_and_trenches/**' # ONLY trigger if frontend changes
 
