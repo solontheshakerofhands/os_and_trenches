@@ -1,6 +1,6 @@
 name: Deploy Flutter Web to Cloudflare Pages
 
-'on':
+on:
   push:
     branches:
       - main
