@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'apps/frontend/**' # ONLY trigger if frontend changes
+      - '/os_and_trenches/**' # ONLY trigger if frontend changes
 
 jobs:
   deploy:
@@ -39,6 +39,6 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: 'my-flutter-app'
-          directory: 'apps/frontend/build/web' # Point directly to the web build output inside the subfolder
+          projectName: 'os_and_trenches'
+          directory: '/os_and_trenches/build/web' # Point directly to the web build output inside the subfolder
           gitBranch: 'main'
