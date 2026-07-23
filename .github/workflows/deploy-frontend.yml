@@ -40,5 +40,5 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
           projectName: 'os-and-trenches'
-          directory: 'os_and_trenches/build/web' # Point directly to the web build output inside the subfolder
+          directory: 'os_and_trenches/web'
           branch: 'main'
